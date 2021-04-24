@@ -1,5 +1,6 @@
 package com.troyanos.airelibre;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.FragmentActivity;
@@ -9,6 +10,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
+import com.google.maps.android.data.geojson.GeoJsonLineStringStyle;
+
+import org.json.JSONException;
+
+import java.io.IOException;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -40,9 +47,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng montevideo = new LatLng(-34.8977, -56.1644);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(montevideo, 14));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(montevideo, 13));
         mMap.setMinZoomPreference(10f);
         mMap.setMaxZoomPreference(20f);
+
+        GeoJsonLineStringStyle lineStringStyle = new GeoJsonLineStringStyle();
+        lineStringStyle.setColor(Color.RED);
+        lineStringStyle.setWidth(6);
+
+        GeoJsonLayer plazas = null;
+        try {
+            plazas = new GeoJsonLayer(mMap, R.raw.plazas, getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        plazas.addLayerToMap();
+
+        GeoJsonLayer bicicircuitos = null;
+        try {
+            bicicircuitos = new GeoJsonLayer(mMap, R.raw.bicicircuitos, getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        bicicircuitos.addLayerToMap();
+
+        plazas.getDefaultPointStyle();
+        bicicircuitos.getDefaultLineStringStyle();
+
+        /*
+        // Colorear ciclovia según tipo
+        for (GeoJsonFeature bicicircuito : bicicircuitos.getFeatures()) {
+            if (bicicircuito.hasProperty("TIPO")) {
+                String tipo = bicicircuito.getProperty("TIPO");
+                if (tipo == "1"){
+
+                }
+            }
+        }*/
 
     }
 }
