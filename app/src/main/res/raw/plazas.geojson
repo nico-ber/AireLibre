@@ -1,0 +1,44 @@
+{
+    "type": "FeatureCollection",
+    "name": "plazas",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [{
+            "type": "Feature",
+            "properties": {
+                "id": 1,
+                "Nombre": "Plaza Lamaro"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-56.17866868717779, -34.913778064475196]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "id": 2,
+                "Nombre": "Parque Liber Seregni"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-56.172014108458342, -34.89679491400571]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "id": 3,
+                "Nombre": "Plaza de los 33"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-56.180308365148512, -34.903032144661488]
+            }
+        }
+    ]
+}
